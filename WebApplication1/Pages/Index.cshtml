@@ -1,0 +1,57 @@
+﻿@page
+@using System.Text.Json;
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            margin: auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <hr>
+    <div>
+        <form method="post">
+            <button type="submit" id="callApiButton" class="btn btn-primary" >Get API Data</button>
+        </form>
+        <div>
+            <h2>API Data:</h2>
+            <HR/>
+            @if (Model.Data.response != null)
+            {
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Journal</th>
+                            <th>Article Type</th>
+                            <th>Eissn</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    @foreach(var item in Model.Data.response.docs)
+                    {
+                       <tr>
+                            <td> @item.journal </td>
+                            <td>@item.article_type</td>
+                            <td>@item.eissn</td>
+                            <td>@item.score</td>
+                       </tr>                      
+                    }
+                 </table>
+                <H6>Data Added Successfully</H6>
+            }
+            else
+            {
+                <p>No data available.</p>
+            }
+           
+        </div>
+
+    </div>
+</div>
